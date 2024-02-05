@@ -9,7 +9,7 @@ REGOLE
 
 // JS Basics
 
-/* ESERCIZIO A
+/* ESERCIZIO A      ok
   Crea una variabile chiamata "sum" e assegnaci il risultato della somma tra i valori 10 e 20.
 */
 let x = 10;
@@ -24,7 +24,7 @@ const sum2 = function (a, b){
 
 console.log(sum2(10, 20))
 
-/* ESERCIZIO B
+/* ESERCIZIO B    ok
   Crea una variabile chiamata "random" e assegnaci un numero casuale tra 0 e 20 (deve essere generato dinamicamente a ogni esecuzione).
 */
 
@@ -32,7 +32,7 @@ const random = Math.floor(Math.random() * (20 - 0 + 1));
 
 console.log(random)
 
-/* ESERCIZIO C
+/* ESERCIZIO C   ok
   Crea una variabile chiamata "me" e assegnaci un oggetto contenente le seguenti proprietà: name = il tuo nome, surname = il tuo cognome, age = la tua età.
 */
 class Student {
@@ -47,21 +47,21 @@ let me = new Student('chiara', 'martinelli', 29)
 
 console.log(me)
 
-/* ESERCIZIO D
+/* ESERCIZIO D    ok
   Crea del codice per rimuovere programmaticamente la proprietà "age" dall'oggetto precedentemente creato.
 */
 
 delete me.age;
 console.log(me)
 
-/* ESERCIZIO E
+/* ESERCIZIO E    ok
   Crea del codice per aggiungere programmaticamente all'oggetto precedentemente creato un array chiamato "skills", contenente i linguaggi di programmazione che conosci.
 */
 
 me.skills = ['javascript'];
 console.log(me)
 
-/* ESERCIZIO F
+/* ESERCIZIO F    ok
   Crea un pezzo di codice per aggiungere un nuovo elemento all'array "skills" contenuto nell'oggetto "me".
 */
 const addSkill = function (skill) {
@@ -71,7 +71,7 @@ const addSkill = function (skill) {
 addSkill('PHP')
 console.log(me)
 
-/* ESERCIZIO G
+/* ESERCIZIO G   ok
   Crea un pezzo di codice per rimuovere programmaticamente l'ultimo elemento dall'array "skills" contenuto nell'oggetto "me".
 */
 
@@ -82,7 +82,7 @@ const removeSkill = function (){
 removeSkill()
 console.log(me)
 
-/* ESERCIZIO 1
+/* ESERCIZIO 1   ok
   Crea una funzione chiamata "dice": deve generare un numero casuale tra 1 e 6.
 */
 
@@ -90,7 +90,7 @@ const dice = () => Math.floor(Math.random() * (6 - 1 + 1) + 1);
 console.log(dice())
 
 
-/* ESERCIZIO 2
+/* ESERCIZIO 2   ok
   Crea una funzione chiamata "whoIsBigger" che riceve due numeri come parametri e ritorna il maggiore dei due.
 */
 let n1 = dice();
@@ -100,7 +100,7 @@ const whoIsBigger = (n1, n2) => Math.max(n1, n2);
 
 console.log(`tra ${n1} e ${n2} il numero maggiore è: `, whoIsBigger(n1, n2))
 
-/* ESERCIZIO 3
+/* ESERCIZIO 3     ok
   Crea una funzione chiamata "splitMe" che riceve una stringa come parametro e ritorna un'array contenente ogni parola della stringa.
 
   Es.: splitMe("I love coding") => ritorna ["I", "Love", "Coding"]
@@ -110,7 +110,7 @@ const splitMe = (myString) => myString.split(" ");
 
 console.log('ma che belli gli esercizi di stamattina', splitMe('ma che belli gli esercizi di stamattina'))
 
-/* ESERCIZIO 4
+/* ESERCIZIO 4   ok  
   Crea una funzione chiamata "deleteOne" che riceve una stringa e un booleano come parametri.
   Se il valore booleano è true la funzione deve ritornare la stringa senza il primo carattere, altrimenti la deve ritornare senza l'ultimo.
 */
@@ -130,16 +130,25 @@ console.log('esercizi di stamattina (più di 15 c.)-->', deleteOne('esercizi di 
 console.log('esercizi (meno di 15 c.)-->', deleteOne('esercizi'))
 
 
-/* ESERCIZIO 5
+/* ESERCIZIO 5  ok but
   Crea una funzione chiamata "onlyLetters" che riceve una stringa come parametro e la ritorna eliminando tutte le cifre numeriche.
 
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
+
+//regularexpression (era meglio usare if-else) oppure .filter
 const onlyLetters = (myStringWNumber) =>  myStringWNumber.match(/\D/g).join('').replace('  ', ' ');
 
 console.log('hemingway è 1 gatto  ----->  ', onlyLetters('hemingway è 1 gatto'))
 
-/* ESERCIZIO 6
+
+// autocorrezione split / filter / isNaN
+const onlyLetters2 = (stringWithNumbers) => stringWithNumbers.split(' ').filter(char => isNaN(char)).join(' ');
+
+console.log('hemingway è 1 gatto  ----->  ', onlyLetters2('hemingway è 1 gatto'))
+
+
+/* ESERCIZIO 6   ok but
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
 
@@ -154,7 +163,32 @@ const isThisAnEmail = function (myEmail) {
  
 console.log(isThisAnEmail('chicca@gmail.com'))
 console.log(isThisAnEmail('chiccagmail.com'))
-/* ESERCIZIO 7
+
+
+// autocorrezione senza regular expression
+
+const isThisAnEmail2 = (myEmail) => {
+  let at = myEmail.indexOf("@");
+  let dot = myEmail.lastIndexOf(".");
+  let space = myEmail.indexOf(" ");
+
+  if ((at != -1) && (at != 0) && (dot != -1) && (dot != 0) && // controllo che @ e . siano presenti e non in prima posizione
+  (dot > at + 1) && (myEmail.length > dot + 1) && (space == -1)) {
+      alert("Email address is valid.");
+      return true;
+  } else {
+      alert("Error !!! Email address is not valid.");
+      return false;
+  }
+}
+
+
+// console.log(isThisAnEmail2('martinellichiara94@gmail.com'))
+// console.log(isThisAnEmail2('martinellichiara94gmail.com'))
+
+
+
+/* ESERCIZIO 7   ok
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
 
@@ -167,7 +201,7 @@ const whatDayIsIt = function () {
 
 console.log(whatDayIsIt())
 
-/* ESERCIZIO 8
+/* ESERCIZIO 8    ok
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
   Deve invocare la precedente funzione dice() il numero di volte specificato nel parametro, e deve tornare un oggetto contenente una proprietà "sum":
   il suo valore deve rappresentare il totale di tutti i valori estratti con le invocazioni di dice().
@@ -198,7 +232,7 @@ const rollTheDices = function (rolls) {
 
 console.log(rollTheDices(7))
 
-/* ESERCIZIO 9
+/* ESERCIZIO 9   ok
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
 
@@ -216,7 +250,7 @@ const howManyDays = (date) => {
 console.log(howManyDays("01/16/2024"))
  
 
-/* ESERCIZIO 10
+/* ESERCIZIO 10   ok
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
 const isTodayMyBirthday = (date) => {
@@ -359,12 +393,15 @@ const movies = [
 ]
 
 
-/* ESERCIZIO 11
+/* ESERCIZIO 11     manca
   Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
 */
 
-/* ESERCIZIO 12
+objFirstFilm = Object.assign({}, movies[0]);
+console.log(objFirstFilm)
+
+/* ESERCIZIO 12    ok
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
 
@@ -387,15 +424,15 @@ const newestMovie = function (array) {
 
 console.log(newestMovie(movies));
 
-/* ESERCIZIO 13
+/* ESERCIZIO 13   ok
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
 
 const countMovies = (myArr) => myArr.length;
 
 console.log(countMovies(movies))
-
-/* ESERCIZIO 14
+   
+/* ESERCIZIO 14     ok
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
 
@@ -406,7 +443,7 @@ const onlyTheYears = function (myArr) {
 } 
 
 console.log(onlyTheYears(movies))
-/* ESERCIZIO 15
+/* ESERCIZIO 15     ok
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
 
@@ -414,7 +451,7 @@ const onlyInLastMillennium = myArr => myArr.filter(movie => parseInt(movie.Year)
 
 console.log(onlyInLastMillennium(movies));
 
-/* ESERCIZIO 16
+/* ESERCIZIO 16    ok
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
 
@@ -422,7 +459,7 @@ const sumAllTheYears = myArr => myArr.reduce((accumulator, currentValue) => accu
 
 console.log(sumAllTheYears(movies));
 
-/* ESERCIZIO 17
+/* ESERCIZIO 17     ok
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
 */
 const searchByTitle = (arr, search) => {
@@ -437,31 +474,14 @@ console.log(searchByTitle(movies, 'Avengers'))
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
      
-/*
 
-const searchAndDivide = (arr, search) => {
-  let matchAndUnmatch = [];
-  matchAndUnmatch.match = {};
-  matchAndUnmatch.unmatch = {};
 
-  arr.forEach( movie => {
-    if (movie['Title'].includes(search)) {
-      matchAndUnmatch.match.push(movie)
-    }else{
-      addUnmatch(movie['Title'])
-    }
-  })
-  
-  return matchAndUnmatch
-  
-};
-
-console.log(searchAndDivide(movies, 'Avengers'))
-*/
 
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
+
+
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
@@ -476,18 +496,31 @@ console.log(selectContainer())
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
 
+const selectAllTd = () => document.getElementsByTagName('td')
+
+
+
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
 
+Array.from(selectAllTd()).forEach( td => console.log(td.textContent));
+
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
+Array.from(selectAllTd()).forEach( td => td.style.backgroundColor = "red");
 
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
+const createNewLi = function(){
+  el = document.createElement('li');
+  el.innerHTML = 'third element';
+  document.getElementById('myList').appendChild(el);
+}
 
+createNewLi()
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
